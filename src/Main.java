@@ -11,8 +11,11 @@ public class Main {
 		BufferedReader origem = new BufferedReader(ler);
 		String linha = null;
 		while ((linha = origem.readLine()) != null) { // Ler linha por linha do arquivo
-			String[] function = linha.split(" ");
-			SwitchOp.setOp(function[0]);
+			String[] argument = linha.split(" ");
+			SwitchOp.setOpcode(argument[0]);
+		
+			System.out.println("Fala ai: " + SwitchOp.getOpcode());
+			
 
 		}
 	}
