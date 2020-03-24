@@ -1,7 +1,9 @@
-lw $s0, $0($zero)
-add $s0, $s0, $s1
-slt $t0, $zero, $s0
-beq $t0, $zero, FIM
-addi $s0, $s0, -1
-FOR:
-
+add s0, s1, s2
+sub s0, s1, s2
+and s0, s1, s2
+or s0, s1, s2
+xor s0, s1, s2
+nor s0, s1, s2
+slt s0, s1, s2
+sll s0, s1, 1
+sll s0, s1, 1

@@ -4,11 +4,11 @@ public class SwitchOp {
 	private static String opcode;
 	private static String format;
 
-	private static void switchOp(String argument) {
-		switch (argument) {
+	private static void switchOp(String[] argument) {
+		switch (argument[0]) {
 		case "add": {
-			format = "R";
 			opcode = "100000";
+			format = "R";
 			break;
 		}
 		case "addi": {
@@ -74,7 +74,7 @@ public class SwitchOp {
 			break;
 		}
 		case "sll": {
-			format = "R";
+			format = "I"; //O certo seria "R", mas teria que criar uma função específica para ele
 			opcode = "000000";
 			break;
 		}
@@ -123,14 +123,14 @@ public class SwitchOp {
 			break;
 		}
 		default: {
-			Label.setLabel(argument);
+			Main.error(argument[0]);
 			break;
 		}
 		}
 	}
 
-	public static void setOpcode(String operador) {
-		switchOp(operador);
+	public static void setOpcode(String[] argument) {
+		switchOp(argument);
 	}
 
 	public static String getOpcode() {
