@@ -74,7 +74,7 @@ public class SwitchOp {
 			break;
 		}
 		case "sll": {
-			format = "I"; //O certo seria "R", mas teria que criar uma função específica para ele
+			format = "R"; 
 			opcode = "000000";
 			break;
 		}
@@ -84,12 +84,12 @@ public class SwitchOp {
 			break;
 		}
 		case "lw": {
-			format = "I";
+			format = "W";
 			opcode = "100011";
 			break;
 		}
 		case "sw": {
-			format = "I";
+			format = "W";
 			opcode = "101011";
 			break;
 		}

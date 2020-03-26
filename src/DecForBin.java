@@ -10,6 +10,7 @@ public class DecForBin {
 	static String temp;
 	static char[] vetor;
 
+	// Verifica qual o tipo de argumento
 	static String switchVariable(String arg) {
 
 		char[] args = arg.toCharArray();
@@ -48,7 +49,7 @@ public class DecForBin {
 			arg = zero;
 			break;
 		default:
-			Main.error(String.valueOf(args[0] + args[1]));
+			Main.error(String.valueOf(args[0]));
 			break;
 		}
 
@@ -83,7 +84,7 @@ public class DecForBin {
 	static String savedTemporaries(String s) {
 		char[] args = s.toCharArray();
 		int num = Integer.parseInt(String.valueOf(args[1]));
-		if (args[1] >= 0 | args[1] <= 7) {
+		if (args[1] >= 0 & args[1] <= 7) {
 			num += 16;
 			s = binary(num);
 		} else
@@ -152,17 +153,21 @@ public class DecForBin {
 		return k;
 	}
 
-	static String immediateTreatment(String immendiate) {
-		vetor = immendiate.toCharArray();
+	static String immediateTreatment(String immediate) {
+		vetor = immediate.toCharArray();
 		if (vetor.length < 16) {
-			temp = immendiate;
-			immendiate = "";
+			temp = immediate;
+			immediate = "";
 			for (int i = vetor.length; i < 16; i++) {
-				immendiate += "0";
+				immediate += "0";
 			}
-			immendiate += temp;
+			immediate += temp;
 		}
-		return immendiate;
+		return immediate;
+	}
+
+	static String immediateWord(String immediate) {
+
 	}
 
 }
