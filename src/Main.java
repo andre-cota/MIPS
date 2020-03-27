@@ -22,7 +22,7 @@ public class Main {
 			}
 			in.close();
 			out.close();
-			System.out.println("\n*********Conversão realizada com sucesso!*********\n");
+			System.out.println("\n*********Success! Decode is now complete!*********\n");
 			
 
 		} catch (IOException exception) {

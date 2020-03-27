@@ -120,7 +120,8 @@ public class SwitchOp {
 			break;
 		}
 		case "nop": {
-			opcode = "000101";
+			format = "N";
+			opcode = "000000";
 			break;
 		}
 		default: {
