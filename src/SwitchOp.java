@@ -5,7 +5,7 @@ public class SwitchOp {
 	private static String format;
 
 	private static void switchOp(String[] argument) {
-		switch (argument[0]) { //De acordo com a função, será dado um tipo para ser tratado e o opcode correspondente
+		switch (argument[0]) { //De acordo com a funcao, sera dado um tipo para ser tratado e o opcode correspondente
 		case "add": {
 			opcode = "100000";
 			format = "R";

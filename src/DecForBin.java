@@ -56,23 +56,23 @@ public class DecForBin {
 			if(args[1] == 'e' && args[2] == 'r' && args[3] == 'o')
 				arg = zero;
 			else
-				SwitchOp.error(String.valueOf(arg));
+				SwitchOp.error(String.valueOf(arg) + " ins't valide argument");
 			break;
 		default:
-			SwitchOp.error(String.valueOf(arg));
+			SwitchOp.error(String.valueOf(arg)+ " ins't valide argument");
 			break;
 		}
 
 		return arg;
 	}
 
-	public static String binary(int number) { //Método para conversão de Decimal para binário
+	public static String binary(int number) { //Metodo para conversao de Decimal para binario
 		int decimal = number;
-		if((SwitchOp.getFormat() == "I" | SwitchOp.getFormat() == "W") & number > (Math.pow(2, 16) -1)) //Validação de Imediatos
+		if((SwitchOp.getFormat() == "I" | SwitchOp.getFormat() == "W") & number > (Math.pow(2, 16) -1)) //Validacao de Imediatos
 			SwitchOp.error(number + " (except 16bits)");
-		if((SwitchOp.getFormat() == "J") & number > (Math.pow(2, 26) -1)) //Validação de endereços
+		if((SwitchOp.getFormat() == "J") & number > (Math.pow(2, 26) -1)) //Validacao de enderecos
 			SwitchOp.error(number + " (except 26bits)");
-		if((SwitchOp.getFormat() == "S") & number > (Math.pow(2, 5) -1)) //Validação de sa
+		if((SwitchOp.getFormat() == "S") & number > (Math.pow(2, 5) -1)) //Validacao de sa
 			SwitchOp.error(number + " (except 5bits)");
 		StringBuilder binary = new StringBuilder();
 		while (decimal > 0) {
@@ -85,7 +85,7 @@ public class DecForBin {
 
 	}
 
-	static int functionResults(String v) { //Valores para resultados de funções
+	static int functionResults(String v) { //Valores para resultados de funcoes
 			char[] args = v.toCharArray();
 			int num = 0;
 			if (args[1] == 0) {
@@ -119,7 +119,7 @@ public class DecForBin {
 		return num;
 	}
 
-	static int temporaries(String t) { //Valores para temporários
+	static int temporaries(String t) { //Valores para temporarios
 		char[] args = t.toCharArray();
 		int num = Integer.parseInt(String.valueOf(args[1]));
 
@@ -148,7 +148,7 @@ public class DecForBin {
 		return num;
 	}
 
-	static String immediateTreatment(String immediate) { //Adiciona "0"s até completar os 16bits de um imediato
+	static String immediateTreatment(String immediate) { //Adiciona "0"s ate completar os 16bits de um imediato
 		vetor = immediate.toCharArray();
 		if (vetor.length < 16) {
 			temp = immediate;
@@ -160,7 +160,7 @@ public class DecForBin {
 		}
 		return immediate;
 	}
-	static String addressTreatment(String address) { //Adiciona "0"s até completar os 26bits de um endereço
+	static String addressTreatment(String address) { //Adiciona "0"s ate completar os 26bits de um endereco
 		vetor = address.toCharArray();
 		if (vetor.length < 26) {
 			temp = address;
@@ -173,7 +173,7 @@ public class DecForBin {
 		return address;
 	}
 	
-	static String saTreatment(String sa) { //Adiciona "0"s até completar os 5bits de um endereço
+	static String saTreatment(String sa) { //Adiciona "0"s ate completar os 5bits de um endereco
 		vetor = sa.toCharArray();
 		if (vetor.length < 5) {
 			temp = sa;
@@ -186,7 +186,7 @@ public class DecForBin {
 		return sa;
 	}
 
-	static String baseOffsetTreatment(String baseOffset, boolean controller) { //Divide o argumento, passa pelos outros métodos para tratar e, de acordo com o controlador, da o retorno desejado
+	static String baseOffsetTreatment(String baseOffset, boolean controller) { //Divide o argumento, passa pelos outros metodos para tratar e, de acordo com o controlador, da o retorno desejado
 		char[] args = baseOffset.toCharArray();
 		int i = 0;
 		String offset = "";
