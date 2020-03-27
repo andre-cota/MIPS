@@ -12,29 +12,36 @@ public class DecForBin {
 
 	// Verifica qual o tipo de argumento
 	static String switchVariable(String arg) {
-
+		int num = 0;
 		char[] args = arg.toCharArray();
 		switch (args[0]) {
 		case 'v':
-			arg = functionResults(arg);
+			num = functionResults(arg);
+			arg = binary(num);
 			break;
+			
 		case 's':
-			if (args[0] == 'p')
+			if (args[1] == 'p')
 				arg = sp;
 			else
-				arg = savedTemporaries(arg);
+				num = savedTemporaries(arg);
+			arg = binary(num);
+			
 			break;
 		case 'a':
-			if (args[0] == 't')
+			if (args[1] == 't')
 				arg = at;
 			else
-				arg = arguments(arg);
+				num = arguments(arg);
+			arg = binary(num);
 			break;
 		case 't':
-			arg = temporaries(arg);
+			num = temporaries(arg);
+			arg = binary(num);
 			break;
 		case 'k':
-			arg = reservedOSKernel(arg);
+			num = reservedOSKernel(arg);
+			arg = binary(num);
 			break;
 		case 'g':
 			arg = gp;
@@ -46,114 +53,102 @@ public class DecForBin {
 			arg = ra;
 			break;
 		case 'z':
-			arg = zero;
+			if(args[1] == 'e' && args[2] == 'r' && args[3] == 'o')
+				arg = zero;
+			else
+				SwitchOp.error(String.valueOf(arg));
 			break;
 		default:
-			Main.error(String.valueOf(args[0]));
+			SwitchOp.error(String.valueOf(arg));
 			break;
 		}
 
 		return arg;
 	}
 
-	public static String binary(int numero) {
-		int d = numero;
-		StringBuffer binary = new StringBuffer(); // guarda os dados
-		while (d > 0) {
-			int b = d % 2;
-			binary.append(b);
-			d = d / 2;
+	public static String binary(int number) { //Método para conversão de Decimal para binário
+		int decimal = number;
+		if((SwitchOp.getFormat() == "I" | SwitchOp.getFormat() == "W") & number > (Math.pow(2, 16) -1)) //Validação de Imediatos
+			SwitchOp.error(number + " (except 16bits)");
+		if((SwitchOp.getFormat() == "J") & number > (Math.pow(2, 26) -1)) //Validação de endereços
+			SwitchOp.error(number + " (except 26bits)");
+		if((SwitchOp.getFormat() == "S") & number > (Math.pow(2, 5) -1)) //Validação de sa
+			SwitchOp.error(number + " (except 5bits)");
+		StringBuilder binary = new StringBuilder();
+		while (decimal > 0) {
+			int bin = decimal % 2;
+			binary.append(bin);
+			decimal = decimal / 2;
 		}
-		String valor = binary.reverse().toString(); // inverte a ordem e imprime
+		String valor = binary.reverse().toString();
 		return valor;
 
 	}
 
-	static String functionResults(String v) {
-		char[] args = v.toCharArray();
-		if (args[1] == 0) {
-			v = "00010";
-		} else if (args[1] == 1) {
-			v = "00011";
-		} else
-			Main.error(String.valueOf(args[1]));
+	static int functionResults(String v) { //Valores para resultados de funções
+			char[] args = v.toCharArray();
+			int num = 0;
+			if (args[1] == 0) {
+				num = 2;
+			} else if (args[1] == 1) {
+				num = 3;
+			} else
+				SwitchOp.error(String.valueOf(v));
+		return num;
 
-		return v;
 	}
 
-	static String savedTemporaries(String s) {
-		char[] args = s.toCharArray();
-		int num = Integer.parseInt(String.valueOf(args[1]));
-		if (args[1] >= 0 & args[1] <= 7) {
-			num += 16;
-			s = binary(num);
-		} else
-			Main.error(String.valueOf(args[1]));
+	static int savedTemporaries(String s) { //Valores para variaveis carregadas
 
-		return s;
+			char[] args = s.toCharArray();
+			int num = Integer.parseInt(String.valueOf(args[1]));
+			if (num >= 0 & num <= 7) {
+				num += 16;
+			} else
+				SwitchOp.error(String.valueOf(s));
+		return num;
 	}
 
-	static String arguments(String a) {
+	static int arguments(String a) { //Valores para argumentos
 		char[] args = a.toCharArray();
 		int num = Integer.parseInt(String.valueOf(args[1]));
-		if (args[1] >= 0 | args[1] <= 3) {
+		if (num >= 0 & num <= 3) {
 			num += 4;
-			a = binary(num);
 		} else
-			Main.error(String.valueOf(args[1]));
-
-		vetor = a.toCharArray();
-		if (vetor.length < 5) {
-			temp = a;
-			a = "";
-			for (int i = vetor.length; i == 5; i++) {
-				a += "0";
-			}
-			a += temp;
-		}
-
-		return a;
+			SwitchOp.error(String.valueOf(a));
+		return num;
 	}
 
-	static String temporaries(String t) {
+	static int temporaries(String t) { //Valores para temporários
 		char[] args = t.toCharArray();
 		int num = Integer.parseInt(String.valueOf(args[1]));
 
 		if (num >= 0 & num <= 7) {
 			num += 8;
-			t = binary(num);
-
-			vetor = t.toCharArray();
-			if (vetor.length < 5) {
-				temp = t;
-				t = "";
-				for (int i = vetor.length; i < 5; i++) {
-					t += "0";
-				}
-				t += temp;
 			}
-		} else if (num == 8)
-			t = "11000";
+		 else if (num == 8)
+			 num = 24;
 		else if (num == 9)
-			t = "11001";
+			num = 25;
 		else
-			Main.error(String.valueOf(args[1]));
-		return t;
+			SwitchOp.error(String.valueOf(t));
+		return num;
 	}
 
-	static String reservedOSKernel(String k) {
+	static int reservedOSKernel(String k) { //Valores para variaveis reservadas
 		char[] args = k.toCharArray();
-		if (args[1] == 0) {
-			k = "11010";
-		} else if (args[1] == 1) {
-			k = "11011";
+		int num = 0;
+		if (args[1] == '0') {
+			num = 26;
+		} else if (args[1] == '1') {
+			num = 27;
 		} else
-			Main.error(String.valueOf(args[1]));
+			SwitchOp.error(String.valueOf(k));
 
-		return k;
+		return num;
 	}
 
-	static String immediateTreatment(String immediate) {
+	static String immediateTreatment(String immediate) { //Adiciona "0"s até completar os 16bits de um imediato
 		vetor = immediate.toCharArray();
 		if (vetor.length < 16) {
 			temp = immediate;
@@ -165,9 +160,55 @@ public class DecForBin {
 		}
 		return immediate;
 	}
+	static String addressTreatment(String address) { //Adiciona "0"s até completar os 26bits de um endereço
+		vetor = address.toCharArray();
+		if (vetor.length < 26) {
+			temp = address;
+			address = "";
+			for (int i = vetor.length; i < 26; i++) {
+				address += "0";
+			}
+			address += temp;
+		}
+		return address;
+	}
+	
+	static String saTreatment(String sa) { //Adiciona "0"s até completar os 5bits de um endereço
+		vetor = sa.toCharArray();
+		if (vetor.length < 5) {
+			temp = sa;
+			sa = "";
+			for (int i = vetor.length; i < 5; i++) {
+				sa += "0";
+			}
+			sa += temp;
+		}
+		return sa;
+	}
 
-	static String immediateWord(String immediate) {
+	static String baseOffsetTreatment(String baseOffset, boolean controller) { //Divide o argumento, passa pelos outros métodos para tratar e, de acordo com o controlador, da o retorno desejado
+		char[] args = baseOffset.toCharArray();
+		int i = 0;
+		String offset = "";
+		while(args[i] != '(') {
+			offset += args[i];
+			i++;
+		}
+		String base = Character.toString(args[i+1]) + Character.toString(args[i+2]);
+		if(offset == "zero") {
+			
+		}
+		try {
+			offset = immediateTreatment(binary(Integer.parseInt(offset)));
+		}
+		catch(NumberFormatException exception) {
+			offset = immediateTreatment(switchVariable(offset));
+		}
+		base = saTreatment(switchVariable(base));
 
+		if (controller == true)
+			return offset;
+		return base;
 	}
 
 }

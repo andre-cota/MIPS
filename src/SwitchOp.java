@@ -5,7 +5,7 @@ public class SwitchOp {
 	private static String format;
 
 	private static void switchOp(String[] argument) {
-		switch (argument[0]) {
+		switch (argument[0]) { //De acordo com a função, será dado um tipo para ser tratado e o opcode correspondente
 		case "add": {
 			opcode = "100000";
 			format = "R";
@@ -21,12 +21,13 @@ public class SwitchOp {
 			opcode = "100010";
 			break;
 		}
-		case "mult": {
+		case "mult": { //precisou ser tratada de modo diferente as outras do tipo R
 			opcode = "011000";
+			format = "M";
 			break;
 		}
-		case "div": {
-			format = "R";
+		case "div": { //precisou ser tratada de modo diferente as outras do tipo R
+			format = "M";
 			opcode = "011010";
 			break;
 		}
@@ -74,22 +75,22 @@ public class SwitchOp {
 			break;
 		}
 		case "sll": {
-			format = "R"; 
+			format = "S"; //precisou ser tratada de modo diferente as outras do tipo R
 			opcode = "000000";
 			break;
 		}
 		case "srl": {
-			format = "R";
+			format = "S"; //precisou ser tratada de modo diferente as outras do tipo R
 			opcode = "000010";
 			break;
 		}
 		case "lw": {
-			format = "W";
+			format = "W"; //precisou ser tratada de modo diferente as outras do tipo I
 			opcode = "100011";
 			break;
 		}
 		case "sw": {
-			format = "W";
+			format = "W"; //precisou ser tratada de modo diferente as outras do tipo I
 			opcode = "101011";
 			break;
 		}
@@ -109,7 +110,7 @@ public class SwitchOp {
 			break;
 		}
 		case "jr": {
-			format = "R";
+			format = "Jr"; //precisou ser tratada de modo diferente as outras do tipo R
 			opcode = "001000";
 			break;
 		}
@@ -119,11 +120,11 @@ public class SwitchOp {
 			break;
 		}
 		case "nop": {
-			opcode = "000000";
+			opcode = "000101";
 			break;
 		}
 		default: {
-			Main.error(argument[0]);
+			error(argument[0]);
 			break;
 		}
 		}
@@ -139,5 +140,13 @@ public class SwitchOp {
 
 	public static String getFormat() {
 		return format;
+	}
+	
+	public static void error(String argumento) {
+		System.out.println("*********************Warning**********************");
+		System.out.println(argumento);
+		System.out.println("Please, check the notes!");
+		System.out.println("**************************************************");
+		System.exit(1);
 	}
 }
