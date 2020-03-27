@@ -13,27 +13,27 @@ public class DecForBin {
 		char[] args = arg.toCharArray();
 		switch (args[0]) {
 		case 'v':
-			arg = binary(functionResults(arg));
+			arg = DecForBin.registerTreatment(binary(functionResults(arg)));
 			break;
 			
 		case 's':
 			if (args[1] == 'p')
 				arg = sp;
 			else
-			arg = binary(savedTemporaries(arg));
+			arg = DecForBin.registerTreatment(binary(savedTemporaries(arg)));
 			
 			break;
 		case 'a':
 			if (args[1] == 't')
 				arg = at;
 			else
-				arg = binary(arguments(arg));
+				arg = DecForBin.registerTreatment(binary(arguments(arg)));
 			break;
 		case 't':
-			arg = binary(temporaries(arg));
+			arg = DecForBin.registerTreatment(binary(temporaries(arg)));
 			break;
 		case 'k':
-			arg = binary(reservedOSKernel(arg));
+			arg = DecForBin.registerTreatment(binary(reservedOSKernel(arg)));
 			break;
 		case 'g':
 			arg = gp;

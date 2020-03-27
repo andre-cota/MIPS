@@ -47,7 +47,7 @@ public class Functions {
 			switch (SwitchOp.getFormat()) {
 			case "R": 						// Trata das funcoes do tipo R, com exceções
 				line = functionR(SwitchOp.getOpcode(), DecForBin.switchVariable(arguments[1]),
-						DecForBin.switchVariable(arguments[2]), DecForBin.switchVariable(arguments[3]));
+						 DecForBin.switchVariable(arguments[2]),  DecForBin.switchVariable(arguments[3]));
 				break;
 			
 			case "I": 					// Trata das funcoes do tipo I, com excecoes
