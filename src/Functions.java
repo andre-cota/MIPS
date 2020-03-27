@@ -2,45 +2,45 @@
 public class Functions {
 
 
-	public static final String shamt = "00000";
-	public static final String funct = "000000";
-	static String line;
-	static int temp;
+	private static final String shamt = "00000";
+	private static final String funct = "000000";
+	private static String line;
+	private static int temp;
 
-	static String functionR(String opcode, String rd, String rs, String rt) { // Monta na ordem correta funcoes do tipo R (salvo excecoes tratadas mais abaixo)
+	private static String functionR(String opcode, String rd, String rs, String rt) { // Monta na ordem correta funcoes do tipo R (salvo excecoes tratadas mais abaixo)
 		String function = funct + rs + rt + rd + shamt + opcode;
 		return function;
 	}
 
-	static String functionI(String opcode, String rt, String rs, String immediate) { // Monta na ordem correta funcoes do tipo I (salvo excecoes tratadas mais abaixo)
+	private static String functionI(String opcode, String rt, String rs, String immediate) { // Monta na ordem correta funcoes do tipo I (salvo excecoes tratadas mais abaixo)
 		String function = opcode + rs + rt + immediate;
 		return function;
 	}
 
-	static String functionJ(String opcode, String address) { // Monta na ordem correta funcoes do tipo J
+	private static String functionJ(String opcode, String address) { // Monta na ordem correta funcoes do tipo J
 		String function = opcode + address;
 		return function;
 	}
 
-	static String functionW(String opcode, String rs, String offset, String base) { // Monta na ordem correta as funcoes Load Word(lw) e Store Word(sw)
+	private static String functionW(String opcode, String rs, String offset, String base) { // Monta na ordem correta as funcoes Load Word(lw) e Store Word(sw)
 		String function = opcode + base + rs + offset;
 		return function;
 	}
 	
-	static String functionM(String opcode, String rs, String rt) { // Monta na ordem correta funcoes mult e div
+	private static String functionM(String opcode, String rs, String rt) { // Monta na ordem correta funcoes mult e div
 		String function = funct + rs + rt + shamt + shamt + opcode;
 		return function;
 	}
-	static String functionS(String opcode, String rd, String rt, String sa) { // Monta na ordem correta funcoes sll e srl
+	private static String functionS(String opcode, String rd, String rt, String sa) { // Monta na ordem correta funcoes sll e srl
 		String function = funct  + shamt + rt + rd + sa + opcode;
 		return function;
 	}
-	static String functionJr(String opcode, String rs) { // Monta na ordem correta funcao jr
+	private static String functionJr(String opcode, String rs) { // Monta na ordem correta funcao jr
 		String function = funct  + rs + shamt + shamt + shamt + opcode;
 		return function;
 	}
 
-	static String buildFunction(String[] arguments) {
+	public static String buildFunction(String[] arguments) {
 
 		try {
 			SwitchOp.setOpcode(arguments); 	// Seta o opcode para dar base aos proximos metodos
@@ -77,7 +77,7 @@ public class Functions {
 			case "S": 						// Trata das funcoes sll e srl
 				temp = Integer.parseInt(arguments[3]);
 				line = functionS(SwitchOp.getOpcode(), DecForBin.switchVariable(arguments[1]),
-						DecForBin.switchVariable(arguments[2]), DecForBin.saTreatment(DecForBin.binary(temp)));
+						DecForBin.switchVariable(arguments[2]), DecForBin.registerTreatment(DecForBin.binary(temp)));
 				break;
 			
 			case "Jr": 						// Trata das funçao jr

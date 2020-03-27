@@ -1,47 +1,39 @@
 
 public class DecForBin {
 
-	public static final String gp = "11100";
-	public static final String sp = "11101";
-	public static final String fp = "11110";
-	public static final String ra = "11111";
-	public static final String at = "00000";
-	public static final String zero = "00000";
-	static String temp;
-	static char[] vetor;
+	private static final String gp = "11100";
+	private static final String sp = "11101";
+	private static final String fp = "11110";
+	private static final String ra = "11111";
+	private static final String at = "00000";
+	private static final String zero = "00000";
 
 	// Verifica qual o tipo de argumento
 	static String switchVariable(String arg) {
-		int num = 0;
 		char[] args = arg.toCharArray();
 		switch (args[0]) {
 		case 'v':
-			num = functionResults(arg);
-			arg = binary(num);
+			arg = binary(functionResults(arg));
 			break;
 			
 		case 's':
 			if (args[1] == 'p')
 				arg = sp;
 			else
-				num = savedTemporaries(arg);
-			arg = binary(num);
+			arg = binary(savedTemporaries(arg));
 			
 			break;
 		case 'a':
 			if (args[1] == 't')
 				arg = at;
 			else
-				num = arguments(arg);
-			arg = binary(num);
+				arg = binary(arguments(arg));
 			break;
 		case 't':
-			num = temporaries(arg);
-			arg = binary(num);
+			arg = binary(temporaries(arg));
 			break;
 		case 'k':
-			num = reservedOSKernel(arg);
-			arg = binary(num);
+			arg = binary(reservedOSKernel(arg));
 			break;
 		case 'g':
 			arg = gp;
@@ -66,7 +58,7 @@ public class DecForBin {
 		return arg;
 	}
 
-	public static String binary(int number) { //Metodo para conversao de Decimal para binario
+	static String binary(int number) { //Metodo para conversao de Decimal para binario
 		int decimal = number;
 		if((SwitchOp.getFormat() == "I" | SwitchOp.getFormat() == "W") & number > (Math.pow(2, 16) -1)) //Validacao de Imediatos
 			SwitchOp.error(number + " (except 16bits)");
@@ -98,7 +90,7 @@ public class DecForBin {
 
 	}
 
-	static int savedTemporaries(String s) { //Valores para variaveis carregadas
+	private static int savedTemporaries(String s) { //Valores para variaveis carregadas
 
 			char[] args = s.toCharArray();
 			int num = Integer.parseInt(String.valueOf(args[1]));
@@ -109,7 +101,7 @@ public class DecForBin {
 		return num;
 	}
 
-	static int arguments(String a) { //Valores para argumentos
+	private static int arguments(String a) { //Valores para argumentos
 		char[] args = a.toCharArray();
 		int num = Integer.parseInt(String.valueOf(args[1]));
 		if (num >= 0 & num <= 3) {
@@ -119,7 +111,7 @@ public class DecForBin {
 		return num;
 	}
 
-	static int temporaries(String t) { //Valores para temporarios
+	private static int temporaries(String t) { //Valores para temporarios
 		char[] args = t.toCharArray();
 		int num = Integer.parseInt(String.valueOf(args[1]));
 
@@ -135,7 +127,7 @@ public class DecForBin {
 		return num;
 	}
 
-	static int reservedOSKernel(String k) { //Valores para variaveis reservadas
+	private static int reservedOSKernel(String k) { //Valores para variaveis reservadas
 		char[] args = k.toCharArray();
 		int num = 0;
 		if (args[1] == '0') {
@@ -149,7 +141,8 @@ public class DecForBin {
 	}
 
 	static String immediateTreatment(String immediate) { //Adiciona "0"s ate completar os 16bits de um imediato
-		vetor = immediate.toCharArray();
+		String temp;
+		char[] vetor = immediate.toCharArray();
 		if (vetor.length < 16) {
 			temp = immediate;
 			immediate = "";
@@ -161,7 +154,8 @@ public class DecForBin {
 		return immediate;
 	}
 	static String addressTreatment(String address) { //Adiciona "0"s ate completar os 26bits de um endereco
-		vetor = address.toCharArray();
+		String temp;
+		char[] vetor = address.toCharArray();
 		if (vetor.length < 26) {
 			temp = address;
 			address = "";
@@ -173,17 +167,18 @@ public class DecForBin {
 		return address;
 	}
 	
-	static String saTreatment(String sa) { //Adiciona "0"s ate completar os 5bits de um endereco
-		vetor = sa.toCharArray();
+	static String registerTreatment(String register) { //Adiciona "0"s ate completar os 5bits de um registrador
+		String temp;
+		char[] vetor = register.toCharArray();
 		if (vetor.length < 5) {
-			temp = sa;
-			sa = "";
+			temp = register;
+			register = "";
 			for (int i = vetor.length; i < 5; i++) {
-				sa += "0";
+				register += "0";
 			}
-			sa += temp;
+			register += temp;
 		}
-		return sa;
+		return register;
 	}
 
 	static String baseOffsetTreatment(String baseOffset, boolean controller) { //Divide o argumento, passa pelos outros metodos para tratar e, de acordo com o controlador, da o retorno desejado
@@ -204,7 +199,7 @@ public class DecForBin {
 		catch(NumberFormatException exception) {
 			offset = immediateTreatment(switchVariable(offset));
 		}
-		base = saTreatment(switchVariable(base));
+		base = registerTreatment(switchVariable(base));
 
 		if (controller == true)
 			return offset;

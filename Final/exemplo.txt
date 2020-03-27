@@ -21,3 +21,4 @@ bne s0, s1, 4
 lw s1 zero(sp)
 sw s7 8(s2)
 nop
+neg s0 s1
