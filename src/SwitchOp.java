@@ -32,7 +32,7 @@ public class SwitchOp {
 			break;
 		}
 		case "neg": {
-			format = "M"; //será montada como as funcoes mult e div
+			format = "M"; //sera montada como as funcoes mult e div
 			opcode = "000111";
 			break;
 		}
