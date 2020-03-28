@@ -47,13 +47,13 @@
 	</target>
 
 	<target name="test" depends="compile-test">
-		<juinit showoutput="true" printsummary="true">
+		<junit showoutput="true" printsummary="true">
 			<formatter type="plain" />
 			<batchtest>
 				<fileset dir="${test.dir}">
 					<include name="**/*Test.java" />
 				</fileset>
 			</batchtest>
-		</juinit>
+		</junit>
 	</target>
 </project>
