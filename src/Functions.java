@@ -45,7 +45,7 @@ public class Functions {
 		try {
 			SwitchOp.setOpcode(arguments); 	// Seta o opcode para dar base aos proximos metodos
 			switch (SwitchOp.getFormat()) {
-			case "R": 						// Trata das funcoes do tipo R, com exceções
+			case "R": 						// Trata das funcoes do tipo R, com excecoes
 				line = functionR(SwitchOp.getOpcode(), DecForBin.switchVariable(arguments[1]),
 						 DecForBin.switchVariable(arguments[2]),  DecForBin.switchVariable(arguments[3]));
 				break;
@@ -80,7 +80,7 @@ public class Functions {
 						DecForBin.switchVariable(arguments[2]), DecForBin.registerTreatment(DecForBin.binary(temp)));
 				break;
 			
-			case "Jr": 						// Trata das funçao jr
+			case "Jr": 						// Trata das funcao jr
 				line = functionJr(SwitchOp.getOpcode(), DecForBin.switchVariable(arguments[1]));
 				break;
 			case "N": 						// Trata das funcoes do tipo R, com excecoes
