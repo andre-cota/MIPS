@@ -35,13 +35,21 @@
 	</path>
 
 	<target name="compile" depends="copy-resources">
+<<<<<<< HEAD
 		<javac destdir="${build.dir}/${classes.dir}" scrdir="${src.dir}">
+=======
+		<javac destdir="${build.dir}/${classes.dir}" srcdir="${src.dir}">
+>>>>>>> b058d66bcc35748199e29ae0a5e9aa5f69c1f7df
 			<classpath refid="classpath-compile" />
 		</javac>
 	</target>
 
 	<target name="compile-test" depends="compile">
+<<<<<<< HEAD
 		<javac destdir="${build.dir}/${classes.test.dir}" scrdir="${test.dir}">
+=======
+		<javac destdir="${build.dir}/${classes.test.dir}" srcdir="${test.dir}">
+>>>>>>> b058d66bcc35748199e29ae0a5e9aa5f69c1f7df
 			<classpath refid="classpath-compile-test" />
 		</javac>
 	</target>
