@@ -1,5 +1,4 @@
 language: java
 jdk:
   - oraclejdk14
-ant test
 sudo: false
