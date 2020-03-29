@@ -1,4 +1,4 @@
 language: java
 jdk:
   - oraclejdk14
-sudo: false
+ant
