@@ -1,4 +1,5 @@
 language: java
 jdk:
   - oraclejdk14
+install: ant deps
 sudo: false
