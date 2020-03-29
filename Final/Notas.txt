@@ -2,18 +2,17 @@
 ||  Decodificador MIPS 32 for machine language  ||
 ==================================================
 
-1- Objetivo
-	Ser um módulo capaz de decodificar os seguintes comandos em linguagem de montagem para instruções de máquina do MIPS:
+Comandos suportados:
 
  •Aritméticas:add,addi sub,mult,div,neg.
  •Lógicas:and,andi,or,ori,xor,nor,slt,slti.
  •Deslocamento Bit a Bit:sll,srl.
  •Acesso à Memória:lw,sw.
  •Desvio Condicional:beq,bne.
- •Desvio Incondicional:j,jr,jal. •Outras:nop
+ •Desvio Incondicional:j,jr,jal. 
+ •Outras:nop
 
-
-2- Como utilizar
+Como utilizar
 
 	O programa deve ser inicializado através de linha de comando, passando o nome do arquivo que deve ser lido com as instruções em linguagem de montagem e, separado por um espaço, o nome do arquivo de saída a ser gerado/escrito.
  OBS: Por ser um programa baseado em linguagem Java, será necessário a instalação de uma maquina virtual Java (Java Runtime Environment)
@@ -23,7 +22,7 @@
 Exemplo: java -jar mips32-decode exemplos.txt saida.txt
 
 
-3- Como deve ser escrita as instruções
+Como deve ser escrita as instruções
 
 	Todas as instruções devem seguir as seguintes regras:
  		•Ser iniciadas das sua funções e depois os argumentos necessários.
@@ -36,10 +35,3 @@ Exemplo: java -jar mips32-decode exemplos.txt saida.txt
 		add s1 t0 t1	div t4 t5	sll s0, s1, 1
 		addi s2 t1 t0	jal 512		andi s0, s1, 1
 
-
-4- Observações
-
-	Serão listados alguns possíveis erros e curiosidades aqui:
-
-		•Do terceiro caractere de uma variável em diante será desconsiderado pelo programa. (Exemplo de um possível add s1ss s2 s3, será considerado somente o s1 do argumento e a decodificação dará o resultado correto).
-		•Na falta de um argumento esperado para a função o programa retornará um erro. Nem sempre especificará onde, vale se atentar quanto a isso.
