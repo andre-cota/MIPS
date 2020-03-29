@@ -25,5 +25,16 @@
 	<target name="compile-test" depends="compile">
 		<javac destdir="${build.dir}/${classes.test.dir}" srcdir="${src.dir}"/>
 	</target>
+	
+	<target name="test" depends="compile-test">
+			<juinit showoutput="true" printsummary="true">
+				<formatter type="plain"/>
+				<batchtest>
+					<fileset dir="${build.dir}/${classes.test.dir}">
+						<include name="**/*Test.java" />
+					</fileset>
+				</batchtest>
+			</juinit>
+		</target>
 
 </project>
