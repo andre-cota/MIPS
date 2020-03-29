@@ -1,7 +1,6 @@
 # MIPS
-Conterá arquivo sobre o decodificador para MIPS
 
-Esse módulo será capaz de decodificar os seguintes comandos em linguagem de montagem para instruçõesde máquina do MIPS:
+Esse módulo é capaz de decodificar os seguintes comandos em linguagem de montagem para instruçõesde máquina do MIPS:
 •Aritméticas:add,addi sub,mult,div,neg.
 •Lógicas:and,andi,or,ori,xor,nor,slt,slti.
 •Deslocamento Bit a Bit:sll,srl.
@@ -9,3 +8,5 @@ Esse módulo será capaz de decodificar os seguintes comandos em linguagem de mo
 •Desvio Condicional:beq,bne.
 •Desvio Incondicional:j,jr,jal.
 •Outras:nop
+
+Demais informações na Nota na pasta Final

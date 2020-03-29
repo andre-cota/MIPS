@@ -94,33 +94,39 @@ class FullTest {
 		String linha = Functions.buildFunction(args);
 		assertEquals("00101010001100000000000000000001", linha);
 	}
+	@Test
 	void testBeq() {
 		String[] args = {"beq", "s0", "s1", "4"};
 		String linha = Functions.buildFunction(args);
 		assertEquals("00010010001100000000000000000100", linha);
 	}
+	@Test
 	void testBne() {
 		String[] args = {"bne", "s0", "s1", "4"};
 		String linha = Functions.buildFunction(args);
 		assertEquals("00010110001100000000000000000100", linha);
 	}
+	@Test
 	void testLw() {
 		String[] args = {"lw", "s0", "4(s1)"};
 		String linha = Functions.buildFunction(args);
 		assertEquals("10001110001100000000000000000100", linha);
 	}
+	@Test
 	void testSw() {
 		String[] args = {"sw", "s0", "4(s1)"};
 		String linha = Functions.buildFunction(args);
 		assertEquals("10101110001100000000000000000100", linha);
 	}
+	@Test
 	void testJ() {
 		String[] args = {"j", "1024"};
 		String linha = Functions.buildFunction(args);
 		assertEquals("00001000000000000000010000000000", linha);
 	}
+	@Test
 	void testJal() {
-		String[] args = {"j", "1024"};
+		String[] args = {"jal", "1024"};
 		String linha = Functions.buildFunction(args);
 		assertEquals("00001100000000000000010000000000", linha);
 	}
